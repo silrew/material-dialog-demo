@@ -1,0 +1,29 @@
+<mat-drawer-container class="example-container" autosize  [class.dark-theme]="isDarkTheme" [dir]="dir">
+    <mat-drawer #drawer class="example-sidenav"
+    [opened]="!isScreenSmall"
+    [mode]="isScreenSmall? 'over' : 'side'"
+     mat-elevation-z4>
+      <mat-toolbar color="primary" >contacts </mat-toolbar>
+        <mat-list>
+            <mat-list-item *ngFor="let user of user$ | async; let i= index">
+            <a  mat-line [routerLink]="['/contact-manager', user.id]">
+              <span class="user-icon">
+                <img *ngIf="i < 4" [src]="images[i]">
+                <img *ngIf="i >= 4" [src]="images[0]">
+              </span> {{user.name}}
+            </a>
+          </mat-list-item>
+      </mat-list>
+     </mat-drawer>
+  
+    <div class="example-sidenav-content">
+        <app-tool-bar (sidenavToggle)="drawer.toggle()"
+        (toggleTheme)="toggleTheme()"
+        (toggleDir)="toggleDir()"
+        ></app-tool-bar>
+        <div class="wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  
+  </mat-drawer-container>

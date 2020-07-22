@@ -1,0 +1,20 @@
+<div *ngIf="!user; else usercard"> no user
+    <mat-spinner></mat-spinner>
+</div>
+
+<ng-template #usercard>
+    <mat-card>
+        <mat-card-header>
+            <div mat-card-avatar class="header-image"></div>
+            <mat-card-title>{{user.name}}</mat-card-title>
+            <mat-card-subtitle>Birthdate {{user.birthDate | date: 'd LLLL'}}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-tab-group>
+                <mat-tab label="Bio"> <p>{{user.bio}}</p> </mat-tab>
+                <mat-tab label="Notes"> <app-notes [notes]="user.notes"></app-notes> </mat-tab> 
+            </mat-tab-group>
+            
+          </mat-card-content>  
+    </mat-card>
+</ng-template>
